@@ -6,7 +6,7 @@ module Specinfra
           Aix,
           Alpine,
           Arch,
-          Clearlinux,
+          Clearlinuxos,
           Coreos,
           Darwin,
           Debian,

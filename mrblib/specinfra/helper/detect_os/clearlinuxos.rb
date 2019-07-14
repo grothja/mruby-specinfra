@@ -1,7 +1,7 @@
 module Specinfra
   module Helper
     class DetectOs
-      class Clearlinux < Specinfra::Helper::DetectOs
+      class Clearlinuxos < Specinfra::Helper::DetectOs
         def detect
           if run_command('swupd').success?
             distro  = nil
@@ -13,7 +13,7 @@ module Specinfra
                 release = line.split('=').last.strip if line =~ /^VERSION_ID=/
               end
             end
-            distro ||= 'clearlinux'
+            distro ||= 'clearlinuxos'
             release ||= nil
             { family: distro.gsub(/[^[:alnum:]]/, '').downcase, release: release }
           end
