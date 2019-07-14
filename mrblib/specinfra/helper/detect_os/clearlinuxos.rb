@@ -3,19 +3,10 @@ module Specinfra
     class DetectOs
       class Clearlinuxos < Specinfra::Helper::DetectOs
         def detect
-          if run_command('swupd').success?
-            distro  = nil
+          if (clearlinuxos_info = run_command('/usr/bin/swupd')) && clearlinuxos_info.success?
+            distro = 'clearlinuxos'
             release = nil
-            os_release = run_command("cat /etc/os-release")
-            if os_release.success?
-              os_release.stdout.each_line do |line|
-                distro  = line.split('=').last.strip if line =~ /^NAME=/
-                release = line.split('=').last.strip if line =~ /^VERSION_ID=/
-              end
-            end
-            distro ||= 'clearlinuxos'
-            release ||= nil
-            { family: distro.gsub(/[^[:alnum:]]/, '').downcase, release: release }
+            { family: distro, release: release }
           end
         end
       end
