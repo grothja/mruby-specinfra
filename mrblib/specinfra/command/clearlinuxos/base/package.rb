@@ -6,6 +6,10 @@ class Specinfra::Command::Clearlinuxos::Base::Package < Specinfra::Command::Linu
 
     alias :check_is_installed_by_swupd :check_is_installed
 
+    def get_version(package, opts=nil)
+      "true"
+    end
+
     def install(package, version=nil, option='')
       "swupd bundle-add --quiet #{package}"
     end
